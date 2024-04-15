@@ -4,7 +4,7 @@
 "neuer Behälter" wird erstellt 
 eindeutige Objektidentifikator (vergeben wie ein Pointer) 
 
-  ```
+  ```java
 new Book0a = new Book("A", 56, authors);
 new Book0b = new Book("A", 56, authors);
 
@@ -18,10 +18,10 @@ Objektvergleich bzw. Inhaltsvergleich über Objects.equals() Funktion
 
 ## Klassen Methoden
 Erstellung:
-```
+```java
 public int methode(...) {...};
 ```
 Aufruf:
-```
+```java
 b.methode(...);
 ```
