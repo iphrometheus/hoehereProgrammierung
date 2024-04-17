@@ -167,8 +167,8 @@ public class QueueByArray implements Queue {
     }
 
     @Override
-    public java.util.Iterator iterator() {
-        return null;
+    public Iterator iterator() {
+        return new ArrayIterator();
     }
 
     @Override
