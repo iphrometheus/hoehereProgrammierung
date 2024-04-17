@@ -28,7 +28,7 @@ public class QueueByArray implements Queue {
          */
         @Override
         public boolean hasNext() {
-            return next() != null;
+            return !(next() == null);
         }
     }
 
@@ -113,7 +113,7 @@ public class QueueByArray implements Queue {
 
     /**
      * Shows if an Object is in the Queue
-     * @param element
+     * @param element Object
      * @return boolean
      */
     @Override
