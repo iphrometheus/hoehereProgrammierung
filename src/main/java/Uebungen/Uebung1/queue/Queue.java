@@ -6,13 +6,21 @@ public interface Queue {
     void enqueue(Object element);
     Object dequeue();
     Object first ();
-    void add(Object element);
-    Object remove();
-    Object element();
+    default void add(Object element){
+        if(element != null) enqueue(element);
+    };
+    default Object remove(){
+        return isEmpty() ? null : dequeue();
+    };
+    default Object element(){
+        return isEmpty() ? null : first();
+    };
     boolean contains(Object element);
     Object get(int i);
     int size();
-    boolean isEmpty();
+    default boolean isEmpty(){
+        return size() == 0;
+    };
     void clear();
     String toString();
     Iterator iterator();

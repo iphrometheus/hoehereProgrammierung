@@ -69,47 +69,6 @@ public class QueueByArray implements Queue {
         return elements[first];
     }
 
-    /**
-     * Adds a new Object (can't be null) alternative enqueue()
-     * @param element Object
-     */
-    @Override
-    public void add(Object element) {
-        if(element == null){
-            return;
-        } else {
-          elements[last] = element;
-          last++;
-        }
-    }
-
-    /**
-     * Removes an object from queue but does return null if empty
-     * @return Object or null
-     */
-    @Override
-    public Object remove() {
-        if (isEmpty()) return null;
-        Object toDequeue = elements[first];
-        int i = 0;
-        for(Object o : elements){
-            if(o == toDequeue) continue;
-            elements[i] = o;
-            i++;
-        }
-        last--;
-        return toDequeue;
-    }
-
-    /**
-     * Returns the first element or null in case of an empty Queue
-     * @return Object or null
-     */
-    @Override
-    public Object element() {
-        if(isEmpty()) return null;
-        return elements[first];
-    }
 
     /**
      * Shows if an Object is in the Queue
@@ -143,7 +102,7 @@ public class QueueByArray implements Queue {
      */
     @Override
     public int size() {
-        return elements.length;
+        return last- first;
     }
 
     /**
@@ -160,10 +119,7 @@ public class QueueByArray implements Queue {
      */
     @Override
     public void clear() {
-        for (int i = 0; i < last; i++){
-            elements[i] = null;
-        }
-        last = 0;
+        elements = new Object[16];
     }
 
     @Override

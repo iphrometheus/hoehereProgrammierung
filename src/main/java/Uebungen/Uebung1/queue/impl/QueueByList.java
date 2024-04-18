@@ -47,28 +47,6 @@ public class QueueByList implements Queue {
         return head;
     }
 
-    @Override
-    public void add(Object element) {
-        if (element == null){
-            return;
-        }
-        new ListElement(element,null);
-    }
-
-    @Override
-    public Object remove() {
-        if(head == null) return null;
-        size --;
-        Object o = head;
-        head = tail;
-        return o;
-    }
-
-    @Override
-    public Object element() {
-       if(isEmpty()) return null;
-       return head;
-    }
 
     @Override
     public boolean contains(Object element) {
@@ -94,10 +72,6 @@ public class QueueByList implements Queue {
         return size;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return size > 1;
-    }
 
     @Override
     public void clear() {
