@@ -60,13 +60,16 @@ case zwei: yield"zwei";
 default : yield "drei";
 ```
 
-## Schnittstellen
+## Schnittstellen/ Interface
 Die Schnittstelle legt die Syntax aber nicht die Semantik der Klasse fest
 Schnittstellen brauchen eine Schnittstellenspezifikation welche **nur** deren Wirkungsweise beschreibt
 Es können beliebig viele Schnittstellen implementiert werden.
 Es wird kein weiterer Speicher verbraucht anders wie bei abstrakten klassen
 Beim Implementieren der Schnittstelle müssen **alle** Methoden implementiert werden
 kann nicht instanziiert werden aber als variablen und Attribut-typ verwendet werden
+### default Methoden in Interfaces
+Direkte implementation der Methode in dem Interface dadurch **nicht mehr** notwendig in der Klasse anschließend zu Implementieren.
+Wenn es geändert werden muss dann mit @Override.
 
 ## Einfach und Mehrfachvererbung
 einfache Vererbung: klasse erbt von höchstens einer anderen Klasse
