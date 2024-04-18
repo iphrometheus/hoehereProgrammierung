@@ -104,11 +104,6 @@ public class QueueByArray implements Queue {
     }
 
     /**
-     * Shows if empty
-     * @return boolean
-     */
-
-    /**
      * removes all elements from the queue
      */
     @Override
