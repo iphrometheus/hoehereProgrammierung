@@ -3,8 +3,6 @@ package Uebungen.Uebung1.queue.impl;
 import Uebungen.Uebung1.queue.Iterator;
 import Uebungen.Uebung1.queue.Queue;
 
-import java.util.function.Predicate;
-
 public class QueueByArray implements Queue {
     private Object[] elements = new Object[16];
     private int first = 0;
@@ -77,7 +75,7 @@ public class QueueByArray implements Queue {
      */
     @Override
     public boolean contains(Object element) {
-        for(Object o: elements){
+        for (Object o : elements) {
             if (o == element) return true;
         }
         return false;
@@ -109,10 +107,6 @@ public class QueueByArray implements Queue {
      * Shows if empty
      * @return boolean
      */
-    @Override
-    public boolean isEmpty() {
-        return last == 0;
-    }
 
     /**
      * removes all elements from the queue
@@ -128,7 +122,8 @@ public class QueueByArray implements Queue {
     }
 
     @Override
-    public Queue filter(Predicate predicate) {
+    public Queue filter(Uebungen.Uebung1.queue.Predicate predicate) {
         return null;
     }
+
 }

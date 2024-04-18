@@ -12,7 +12,6 @@ public class QueueByList implements Queue {
 
     public class ListElement {
         private Object element;
-        private Object next;
         ListElement(Object element, ListElement next){
             head = element;
             tail = next;
@@ -21,7 +20,7 @@ public class QueueByList implements Queue {
     public class ListIterator implements Iterator{
         private ListElement iter = (ListElement) head;
         public Object next(){
-            return iter.next;
+            return tail;
         }
         public boolean hasNext(){
             return !(next() == null);
@@ -86,7 +85,8 @@ public class QueueByList implements Queue {
     }
 
     @Override
-    public Queue filter(Predicate predicate) {
+    public Queue filter(Uebungen.Uebung1.queue.Predicate predicate) {
         return null;
     }
+
 }

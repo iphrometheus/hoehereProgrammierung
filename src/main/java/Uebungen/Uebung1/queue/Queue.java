@@ -1,7 +1,5 @@
 package Uebungen.Uebung1.queue;
 
-import java.util.function.Predicate;
-
 public interface Queue {
     void enqueue(Object element);
     Object dequeue();
