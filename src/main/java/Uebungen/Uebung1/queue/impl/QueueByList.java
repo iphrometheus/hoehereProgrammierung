@@ -42,9 +42,7 @@ public class QueueByList implements Queue {
             head = el;
             size++;
         } else {
-            while (tail.next != null){
-                tail = tail.next;
-            }
+            while (tail.next != null && tail.next.next != null) tail = tail.next;
             tail.next = el;
             size++;
         }
