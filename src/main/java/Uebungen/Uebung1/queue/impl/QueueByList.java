@@ -4,6 +4,9 @@ import Uebungen.Uebung1.queue.Iterator;
 import Uebungen.Uebung1.queue.Predicate;
 import Uebungen.Uebung1.queue.Queue;
 
+
+import java.util.Objects;
+
 public class QueueByList implements Queue {
     private int size = 0;
     private ListElement head;
@@ -11,36 +14,41 @@ public class QueueByList implements Queue {
 
     public class ListElement {
         private Object element;
-
+        private ListElement next;
         ListElement(Object element, ListElement next) {
             this.element = element;
-            tail = next;
+            this.next = next;
         }
     }
 
-    public class ListIterator {
+    public class ListIterator implements Iterator {
         private ListElement iter = head;
 
         public Object next() {
-            iter = tail;
+            iter = iter.next;
             return iter;
         }
 
         public boolean hasNext() {
-            return tail != null;
+            return head.next != null;
         }
     }
 
     @Override
     public void enqueue(Object element) {
-        head = new ListElement(element, null);
-        size++;
+        if(size == 0){
+            head = new ListElement(element, null);
+            size++;
+        } else {
+            head.next = new ListElement(element, null);
+            size++;
+        }
     }
 
     @Override
     public Object dequeue() {
         Object tmp = head;
-        head = tail;
+        head = head.next;
         size--;
         return tmp;
     }
@@ -52,33 +60,43 @@ public class QueueByList implements Queue {
 
     @Override
     public boolean contains(Object element) {
-        while (head == element && head == null) {
-            head = tail;
+        while (head != element && head != null) {
+            head = head.next;
         }
-        return head == null;
+        return !(head == null);
     }
 
     @Override
     public Object get(int i) {
         for (int j = 0; j < i; j++) {
-            head = tail;
+            head = head.next;
         }
         return head;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
-
+        head = null;
+        head.next = null;
     }
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new ListIterator();
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        while (head != null){
+            str.append(Objects.toString(head)+ ", ");
+        }
+        return str.toString();
     }
 
     @Override
