@@ -1,44 +1,48 @@
 package Uebungen.Uebung1.queue.impl;
 
 import Uebungen.Uebung1.queue.Iterator;
+import Uebungen.Uebung1.queue.Predicate;
 import Uebungen.Uebung1.queue.Queue;
-
-import java.util.function.Predicate;
 
 public class QueueByList implements Queue {
     private int size = 0;
-    private Object head;
-    private Object tail;
+    private ListElement head;
+    private ListElement tail;
 
     public class ListElement {
         private Object element;
-        ListElement(Object element, ListElement next){
-            head = element;
+
+        ListElement(Object element, ListElement next) {
+            this.element = element;
             tail = next;
         }
     }
-    public class ListIterator implements Iterator{
-        private ListElement iter = (ListElement) head;
-        public Object next(){
-            return tail;
+
+    public class ListIterator {
+        private ListElement iter = head;
+
+        public Object next() {
+            iter = tail;
+            return iter;
         }
-        public boolean hasNext(){
-            return !(next() == null);
+
+        public boolean hasNext() {
+            return tail != null;
         }
     }
 
     @Override
     public void enqueue(Object element) {
-        new ListElement(element,null);
+        head = new ListElement(element, null);
         size++;
     }
 
     @Override
     public Object dequeue() {
-        size--;
-        Object toRet = head;
+        Object tmp = head;
         head = tail;
-        return toRet;
+        size--;
+        return tmp;
     }
 
     @Override
@@ -46,47 +50,39 @@ public class QueueByList implements Queue {
         return head;
     }
 
-
     @Override
     public boolean contains(Object element) {
-        for (int s = 0; s < size; s++) {
-            if (element != head){
-                head = tail;
-            } else return true;
+        while (head == element && head == null) {
+            head = tail;
         }
-        return false;
+        return head == null;
     }
 
     @Override
     public Object get(int i) {
         for (int j = 0; j < i; j++) {
             head = tail;
-
         }
         return head;
     }
 
     @Override
     public int size() {
-        return size;
+        return 0;
     }
-
 
     @Override
     public void clear() {
-        head = null;
-        tail = null;
-        size = 0;
+
     }
 
     @Override
     public Iterator iterator() {
-        return new ListIterator();
-    }
-
-    @Override
-    public Queue filter(Uebungen.Uebung1.queue.Predicate predicate) {
         return null;
     }
 
+    @Override
+    public Queue filter(Predicate predicate) {
+        return null;
+    }
 }
