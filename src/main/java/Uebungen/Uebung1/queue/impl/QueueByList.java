@@ -36,18 +36,23 @@ public class QueueByList implements Queue {
 
     @Override
     public void enqueue(Object element) {
+        tail = head;
+        ListElement el = new ListElement(element, null);
         if(size == 0){
-            head = new ListElement(element, null);
+            head = el;
             size++;
         } else {
-            head.next = new ListElement(element, null);
+            while (tail.next != null){
+                tail = tail.next;
+            }
+            tail.next = el;
             size++;
         }
     }
 
     @Override
     public Object dequeue() {
-        Object tmp = head;
+        Object tmp = head.element;
         head = head.next;
         size--;
         return tmp;
@@ -60,18 +65,21 @@ public class QueueByList implements Queue {
 
     @Override
     public boolean contains(Object element) {
-        while (head != element && head != null) {
-            head = head.next;
+        tail = head;
+        while (tail != element && tail != null) {
+            tail = tail.next;
         }
-        return !(head == null);
+        return !(tail == null);
     }
 
     @Override
     public Object get(int i) {
+        if(i+1 > size) return null;
+        tail = head;
         for (int j = 0; j < i; j++) {
-            head = head.next;
+            tail = tail.next;
         }
-        return head;
+        return tail.element;
     }
 
     @Override
@@ -82,7 +90,7 @@ public class QueueByList implements Queue {
     @Override
     public void clear() {
         head = null;
-        head.next = null;
+        size = 0;
     }
 
     @Override
@@ -92,11 +100,19 @@ public class QueueByList implements Queue {
 
     @Override
     public String toString(){
-        StringBuilder str = new StringBuilder();
-        while (head != null){
-            str.append(Objects.toString(head)+ ", ");
+        String str = "";
+        tail = head;
+        if (size == 0) return "null";
+        for (int i = 0; i < size; i++) {
+            if (tail == null){
+                str += "null, ";
+                tail = tail.next;
+                continue;
+            }
+            str += tail.element + ", ";
+            tail = tail.next;
         }
-        return str.toString();
+        return str;
     }
 
     @Override
