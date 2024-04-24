@@ -4,41 +4,20 @@ import Uebungen.Uebung1.queue.Iterator;
 import Uebungen.Uebung1.queue.Predicate;
 import Uebungen.Uebung1.queue.Queue;
 
-
-import java.util.Objects;
-
 public class QueueByList implements Queue {
     private int size = 0;
     private ListElement head;
     private ListElement tail;
 
-    public class ListElement {
-        private Object element;
-        private ListElement next;
-        ListElement(Object element, ListElement next) {
-            this.element = element;
-            this.next = next;
-        }
-    }
-
-    public class ListIterator implements Iterator {
-        private ListElement iter = head;
-
-        public Object next() {
-            iter = iter.next;
-            return iter;
-        }
-
-        public boolean hasNext() {
-            return head.next != null;
-        }
+    private void setHead(){
+        tail = head;
     }
 
     @Override
     public void enqueue(Object element) {
-        tail = head;
+        setHead();
         ListElement el = new ListElement(element, null);
-        if(size == 0){
+        if (size == 0) {
             head = el;
             size++;
         } else {
@@ -72,7 +51,7 @@ public class QueueByList implements Queue {
 
     @Override
     public Object get(int i) {
-        if(i+1 > size) return null;
+        if (i + 1 > size) return null;
         tail = head;
         for (int j = 0; j < i; j++) {
             tail = tail.next;
@@ -97,24 +76,53 @@ public class QueueByList implements Queue {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String str = "";
         tail = head;
         if (size == 0) return "null";
         for (int i = 0; i < size; i++) {
-            if (tail == null){
+            if (tail == null) {
                 str += "null, ";
-                tail = tail.next;
-                continue;
+            }else {
+                str += tail.element + ", ";
             }
-            str += tail.element + ", ";
             tail = tail.next;
         }
         return str;
+    }
+    public String toStringRec(){
+        if(tail == null && tail.next == null) return "null";
+        if(tail == null) return "null, ";
+        tail = tail.next;
+        return tail.element.toString() + toStringRec();
+
     }
 
     @Override
     public Queue filter(Predicate predicate) {
         return null;
+    }
+
+    public class ListElement {
+        private final Object element;
+        private ListElement next;
+
+        ListElement(Object element, ListElement next) {
+            this.element = element;
+            this.next = next;
+        }
+    }
+
+    public class ListIterator implements Iterator {
+        private ListElement iter = head;
+
+        public Object next() {
+            iter = iter.next;
+            return iter;
+        }
+
+        public boolean hasNext() {
+            return iter.next != null;
+        }
     }
 }
