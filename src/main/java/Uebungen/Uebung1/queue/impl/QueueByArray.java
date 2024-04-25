@@ -8,51 +8,26 @@ public class QueueByArray implements Queue {
     private int first = 0;
     private int last = 0;
 
-    public class ArrayIterator implements Iterator{
-        private int iter = first;
-
-        /**
-         * Returns the next Object
-         * @return Object
-         */
-        @Override
-        public Object next() {
-            return elements[iter + 1];
-        }
-
-        /**
-         * Checks if a next Object is existent
-         * @return boolean
-         */
-        @Override
-        public boolean hasNext() {
-            return !(next() == null);
-        }
-    }
-
     /**
      * Adds a new Object (can be null) alternative add()
+     *
      * @param element Object
      */
     @Override
     public void enqueue(Object element) {
         elements[last] = element;
-         last++;
+        last++;
     }
 
     /**
      * Removes the first element does return the first element
+     *
      * @return Object
      */
     @Override
     public Object dequeue() {
         Object toDequeue = elements[first];
-        int i = 0;
-        for(Object o : elements){
-            if(o == toDequeue) continue;
-            elements[i] = o;
-            i++;
-        }
+        System.arraycopy(elements, 1, elements, 0, elements.length - 1);
         last--;
         return toDequeue;
     }
@@ -60,6 +35,7 @@ public class QueueByArray implements Queue {
     /**
      * Returns the first element of the queue does not delete it.
      * alternative element()
+     *
      * @return Object
      */
     @Override
@@ -67,9 +43,9 @@ public class QueueByArray implements Queue {
         return elements[first];
     }
 
-
     /**
      * Shows if an Object is in the Queue
+     *
      * @param element Object
      * @return boolean
      */
@@ -83,12 +59,13 @@ public class QueueByArray implements Queue {
 
     /**
      * Does return the Object with the index i
+     *
      * @param i int
      * @return Object
      */
     @Override
     public Object get(int i) {
-        if(i+1 == last){
+        if (i + 1 == last) {
             return elements[i];
         }
         return null;
@@ -96,11 +73,12 @@ public class QueueByArray implements Queue {
 
     /**
      * Returns the number of elements in the array
+     *
      * @return int
      */
     @Override
     public int size() {
-        return last- first;
+        return last - first;
     }
 
     /**
@@ -109,6 +87,7 @@ public class QueueByArray implements Queue {
     @Override
     public void clear() {
         elements = new Object[16];
+        last = first = 0;
     }
 
     @Override
@@ -118,7 +97,46 @@ public class QueueByArray implements Queue {
 
     @Override
     public Queue filter(Uebungen.Uebung1.queue.Predicate predicate) {
-        return null;
+        var result = new QueueByArray();
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            var tmp = iterator().next();
+            if (predicate.test(tmp)) {
+                result.enqueue(tmp);
+            }
+        }
+        return result;
+    }
+    @Override
+    public String toString(){
+        return convertToString();
+    }
+
+    private class ArrayIterator implements Iterator {
+        private int iter = first;
+
+        /**
+         * Returns the Object of the Array where the Iterator is
+         *
+         * @return Object
+         */
+        @Override
+        public Object next() {
+            // return elemnts[iter++] iter wird erst bei return hochgezählt
+            var e = elements[iter];
+            iter++;
+            return e;
+        }
+
+        /**
+         * Checks if a next Object is existent
+         *
+         * @return boolean
+         */
+        @Override
+        public boolean hasNext() {
+            return elements[iter] != null;
+        }
     }
 
 }
