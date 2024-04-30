@@ -19,7 +19,7 @@ Objektvergleich bzw. Inhaltsvergleich über Objects.equals() Funktion
 ## Klassen Methoden
 Erstellung:
 ```java
-public int methode(...) {...};
+public int methode(...) {...}
 ```
 Aufruf:
 ```java
