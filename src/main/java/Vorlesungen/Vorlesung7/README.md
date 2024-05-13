@@ -6,3 +6,10 @@ Hash Table Linked List
 
 ## Comparable
 wenn eine Super-Klasse vergleichbar ist dann ist die Unterklasse auch vergleichbar
+
+## Lambda Ausdrücke
+Entweder mit Pfeil oder mit :: 
+
+## Dateien aus Ressourcen Verzeichnis einlesen
+getResourceAsStream("Dateiname")
+
