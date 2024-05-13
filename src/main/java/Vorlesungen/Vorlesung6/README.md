@@ -14,10 +14,10 @@ class SLL <E> { // E ist der generische Datentyp
     }
 }
 ``` 
-in go (nicht die Gleiche Funktionalität):
+Beispiel für Generics in Go (nicht die Gleiche Funktionalität):
 
 ```go
 func compare [K comparable] (in K, toCompare K) bool{
-    return in == toCompare
+    return in == toCompare // https://play.golang.com/
 }
 ```
